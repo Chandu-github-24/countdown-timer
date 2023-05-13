@@ -31,7 +31,7 @@ body {
 }
 
 .big_text {
-    font-size: 6.5rem;
+    font-size: 4.5rem;
     font-weight: bold;
     line-height: 1;
     margin: 10px;
@@ -72,8 +72,11 @@ body {
     color: #fff;
     background-color: #809bfd;
 }
-.countdown-input-button{
+
+.countdown-input-button {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
+
+ 

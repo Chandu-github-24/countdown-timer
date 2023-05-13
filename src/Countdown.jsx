@@ -1,5 +1,6 @@
+ 
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import "../src/Countdown.css";
 
 
@@ -14,10 +15,33 @@ const Countdown = () => {
 
   const [seconds, setSeconds] = useState(0);
 
-  const [InputDate, setInputDate] = useState("1st jan 2023");
+  const [InputDate, setInputDate] = useState("15 may 2023");
 
-  const[CurrentDate,setCurrentDate] = useState(InputDate);
+  const [CurrentDate, setCurrentDate] = useState(InputDate);
 
+
+
+
+  useEffect(() => {
+    const changingdate = new Date(InputDate);
+    const currentdate = new Date();
+    const totalseconds = (changingdate - currentdate) / 1000;
+    setDays(formatTime(Math.floor(totalseconds / 3600 / 24)));
+
+    setHours(Math.floor(totalseconds / 3600) % 24);
+    setMinutes(Math.floor(totalseconds / 60) % 24);
+    setSeconds(Math.floor(totalseconds % 60));
+  }, [CurrentDate, InputDate]);
+  function formatTime(time) {
+    return time < 10 ? `0${time}` : time;
+  }
+  const onChangeHandler = (event) => {
+    setInputDate(event.target.value)
+  }
+  const onClickHandler = () => {
+    setCurrentDate(InputDate);
+
+  }
   return (
     <div className="countdown_container">
 
@@ -40,13 +64,16 @@ const Countdown = () => {
         </div>
       </div>
       <div className="countdown-input-button">
-        <input className='countdown-input' />
-        <button className='countdown-btn'>Countdown</button>
+        <input className='countdown-input' onChange={onChangeHandler} />
+        <button className='countdown-btn' onClick={onClickHandler}>Countdown</button>
       </div>
 
     </div>
+
   );
+
 };
 
 export default Countdown
+
 
